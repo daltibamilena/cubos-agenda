@@ -1,0 +1,22 @@
+{
+  "name": "cubos-agenda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --ci --forceExit",
+    "agenda": "nodemon app.js"
+  },
+  "author": "Milena",
+  "license": "ISC",
+  "dependencies": {
+    "celebrate": "^15.0.1",
+    "express": "^4.17.3",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

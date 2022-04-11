@@ -1,4 +1,5 @@
 const { getStoredData, getDatesInRange, getDayWeek } = require("../helpers");
+const _ = require("lodash");
 
 exports.execute = (req) => {
   let data = getStoredData();
@@ -7,12 +8,9 @@ exports.execute = (req) => {
   let timeScheduleInterval = [];
   getDaysInterval.map((day) => {
     let dayWeek = getDayWeek(day);
-    let intervals = data[dayWeek];
-    intervals.filter((elem) => {
-      if (elem.day == undefined) return true;
-      else elem.day === day;
-    });
-
+    let intervals = data[dayWeek].filter(
+      (elem) => elem.day === day || elem.day === undefined
+    );
     timeScheduleInterval.push({
       day: day,
       intervals: intervals.map((elem) => _.omit(elem, "day")),
@@ -20,6 +18,6 @@ exports.execute = (req) => {
   });
   return {
     status: 200,
-    message: timeScheduleInterval
-  }
+    message: timeScheduleInterval,
+  };
 };

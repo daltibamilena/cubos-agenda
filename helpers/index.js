@@ -1,38 +1,32 @@
 const fs = require("fs");
-exports.day_of_the_week = (day) => {
-  return name_week_day(day.getDay());
-};
+const moment = require("moment");
 
-const weekDays = [
-  "domingo",
-  "segunda",
-  "terca",
-  "quarta",
-  "quinta",
-  "sexta",
-  "sabado",
-];
-
-const name_week_day = (dayOfTheWeek) => {
-  return weekDays[dayOfTheWeek];
+exports.getDayWeek = (day) => {
+  moment.locale("pt-br");
+  let date = formatDate(day);
+  return date.format("ddd");
 };
 
 exports.getDatesInRange = (startDate, endDate) => {
-  const date = new Date(startDate.getTime());
-
+  startDate = formatDate(startDate);
+  endDate = formatDate(endDate);
+  const date = startDate;
   const dates = [];
 
   while (date <= endDate) {
-    dates.push(new Date(date));
-    date.setDate(date.getDate() + 1);
+    dates.push(unformatDate(date));
+    date.add(1, "days");
   }
 
   return dates;
 };
 
-exports.formatDate = (day) => {
-  var dateParts = day.split("-");
-  return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+const formatDate = (day) => {
+  return moment(day, "DD-MM-YYYY");
+};
+
+const unformatDate = (date) => {
+  return moment(date).format("DD-MM-YYYY");
 };
 
 exports.regexDate =
@@ -43,4 +37,8 @@ exports.regexTime = /^([0-1][0-9]|[2][0-3]):([0-5][0-9])$/;
 exports.getStoredData = () => {
   let stored_data = fs.readFileSync("time.json");
   return JSON.parse(stored_data);
+};
+
+exports.writeData = (data) => {
+  fs.writeFileSync("time.json", JSON.stringify(data));
 };

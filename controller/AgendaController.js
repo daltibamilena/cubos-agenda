@@ -29,7 +29,7 @@ exports.createSingleTimeSchedule = (req, res) => {
   }
   data[dayWeek] = [...data[dayWeek], { ...req.body }];
   writeData(data);
-  res.send(data);
+  res.send(`Horário criado com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.createDailyTimeSchedule = (req, res) => {
@@ -47,7 +47,7 @@ exports.createDailyTimeSchedule = (req, res) => {
     data[dayWeek] = [...data[dayWeek], { ...req.body }];
   }
   writeData(data);
-  res.send(data);
+  res.send(`Horário criado com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.createWeeklyTimeSchedule = (req, res) => {
@@ -67,7 +67,7 @@ exports.createWeeklyTimeSchedule = (req, res) => {
   });
 
   writeData(data);
-  res.send(data);
+  res.send(`Horário criado com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.deleteSingleTimeSchedule = (req, res) => {
@@ -85,7 +85,7 @@ exports.deleteSingleTimeSchedule = (req, res) => {
   });
 
   writeData(data);
-  res.send(data);
+  res.send(`Horário excluído com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.deleteDailyTimeSchedule = (req, res) => {
@@ -104,7 +104,7 @@ exports.deleteDailyTimeSchedule = (req, res) => {
   }
 
   writeData(data);
-  res.send(data);
+  res.send(`Horário excluído com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.deleteWeeklyTimeSchedule = (req, res) => {
@@ -125,7 +125,7 @@ exports.deleteWeeklyTimeSchedule = (req, res) => {
   }
 
   writeData(data);
-  res.send(data);
+  res.send(`Horário excluído com sucesso: ${JSON.stringify(req.body)}`);
 };
 
 exports.getTimeScheduleInterval = (req, res) => {

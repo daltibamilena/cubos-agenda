@@ -8,7 +8,7 @@ exports.execute = (req) => {
     if (timeScheduleExists) {
       return {
         status: 422,
-        message: `Horário já cadastrado: horário ${timeScheduleExists.start} - ${timeScheduleExists.end} todos os dias`,
+        message: `Horário já cadastrado: horário ${timeScheduleExists.start} - ${timeScheduleExists.end}`,
       };
     }
 

@@ -3,7 +3,6 @@ const _ = require("lodash");
 const {
   getDayWeek,
   getDatesInRange,
-  formatDate,
   getStoredData,
   writeData,
 } = require("../helpers");
@@ -11,6 +10,11 @@ const {
   checkIfTimeScheduleExists,
   checkIfTimeScheduleExistsEqual,
 } = require("../middleware/validations");
+
+exports.showTimeSchedule = (req, res) => {
+   let data = getStoredData();
+   res.send(data);
+}
 
 exports.createSingleTimeSchedule = (req, res) => {
   let data = getStoredData();
@@ -138,9 +142,9 @@ exports.getTimeScheduleInterval = (req, res) => {
     });
 
     timeScheduleInterval.push({
-        day: day,
-        intervals: intervals.map((elem) => _.omit(elem, "day")),
-      })
+      day: day,
+      intervals: intervals.map((elem) => _.omit(elem, "day")),
+    });
   });
   res.send(timeScheduleInterval);
 };

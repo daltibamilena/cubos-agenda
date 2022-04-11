@@ -7,16 +7,12 @@ const {
   deleteSingleTimeSchedule,
   deleteDailyTimeSchedule,
   deleteWeeklyTimeSchedule,
-  
   getTimeScheduleInterval,
+  showTimeSchedule,
 } = require("../controller/AgendaController");
 
 module.exports = (app) => {
-  app.get("/", (req, res) => {
-    let stored_data = fs.readFileSync("time.json");
-    let data = JSON.parse(stored_data);
-    res.send(data);
-  });
+  app.get("/", showTimeSchedule);
 
   app.post(
     "/",
@@ -47,15 +43,7 @@ module.exports = (app) => {
       [Segments.BODY]: Joi.object().keys({
         daysWeek: Joi.array()
           .items(
-            Joi.string().valid(
-              "dom",
-              "seg",
-              "ter",
-              "qua",
-              "qui",
-              "sex",
-              "sab"
-            )
+            Joi.string().valid("dom", "seg", "ter", "qua", "qui", "sex", "sab")
           )
           .required(),
         start: Joi.string().regex(regexTime).required(),
@@ -94,15 +82,7 @@ module.exports = (app) => {
       [Segments.BODY]: Joi.object().keys({
         daysWeek: Joi.array()
           .items(
-            Joi.string().valid(
-              "dom",
-              "seg",
-              "ter",
-              "qua",
-              "qui",
-              "sex",
-              "sáb"
-            )
+            Joi.string().valid("dom", "seg", "ter", "qua", "qui", "sex", "sáb")
           )
           .required(),
         start: Joi.string().regex(regexTime).required(),
@@ -112,12 +92,14 @@ module.exports = (app) => {
     deleteWeeklyTimeSchedule
   );
 
-  app.post("/interval", celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      start: Joi.string().regex(regexDate).required(),
-      end: Joi.string().regex(regexDate).required(),
+  app.post(
+    "/interval",
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        start: Joi.string().regex(regexDate).required(),
+        end: Joi.string().regex(regexDate).required(),
+      }),
     }),
-  }),
     getTimeScheduleInterval
-  ); 
+  );
 };

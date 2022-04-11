@@ -1,5 +1,6 @@
 const fs = require("fs");
 const moment = require("moment");
+const file = "source/time_schedule.json"
 
 exports.getDayWeek = (day) => {
   moment.locale("pt-br");
@@ -35,10 +36,10 @@ exports.regexDate =
 exports.regexTime = /^([0-1][0-9]|[2][0-3]):([0-5][0-9])$/;
 
 exports.getStoredData = () => {
-  let stored_data = fs.readFileSync("time.json");
+  let stored_data = fs.readFileSync(file);
   return JSON.parse(stored_data);
 };
 
 exports.writeData = (data) => {
-  fs.writeFileSync("time.json", JSON.stringify(data));
+  fs.writeFileSync(file, JSON.stringify(data));
 };

@@ -45,16 +45,16 @@ module.exports = (app) => {
     "/weekly",
     celebrate({
       [Segments.BODY]: Joi.object().keys({
-        dayWeek: Joi.array()
+        daysWeek: Joi.array()
           .items(
             Joi.string().valid(
-              "domingo",
-              "segunda",
-              "terca",
-              "quarta",
-              "quinta",
-              "sexta",
-              "sabado"
+              "dom",
+              "seg",
+              "ter",
+              "qua",
+              "qui",
+              "sex",
+              "sab"
             )
           )
           .required(),
@@ -92,16 +92,16 @@ module.exports = (app) => {
     "/weekly",
     celebrate({
       [Segments.BODY]: Joi.object().keys({
-        dayWeek: Joi.array()
+        daysWeek: Joi.array()
           .items(
             Joi.string().valid(
-              "domingo",
-              "segunda",
-              "terca",
-              "quarta",
-              "quinta",
-              "sexta",
-              "sabado"
+              "dom",
+              "seg",
+              "ter",
+              "qua",
+              "qui",
+              "sex",
+              "sáb"
             )
           )
           .required(),
